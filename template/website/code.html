@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed-dim": "#ffb77d",
+              "on-secondary-fixed": "#2f1500",
+              "surface-container-lowest": "#ffffff",
+              "inverse-on-surface": "#f8f0e1",
+              "outline": "#75796b",
+              "on-primary": "#ffffff",
+              "tertiary-fixed": "#ffdbcb",
+              "inverse-primary": "#bbcd9c",
+              "on-error-container": "#93000a",
+              "on-secondary-fixed-variant": "#6e3900",
+              "on-primary-container": "#d6e8b6",
+              "on-tertiary-container": "#ffd9c8",
+              "on-surface-variant": "#45483c",
+              "on-background": "#1e1b13",
+              "tertiary-container": "#995025",
+              "surface-container-low": "#fbf3e4",
+              "background": "#fff8ef",
+              "primary-fixed-dim": "#bbcd9c",
+              "surface": "#fff8ef",
+              "on-tertiary-fixed-variant": "#75340a",
+              "surface-dim": "#e1d9cb",
+              "error": "#ba1a1a",
+              "outline-variant": "#c5c8b8",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#fe932c",
+              "surface-tint": "#54643c",
+              "secondary": "#904d00",
+              "surface-container-highest": "#e9e2d3",
+              "on-tertiary": "#ffffff",
+              "surface-bright": "#fff8ef",
+              "primary-fixed": "#d7e9b7",
+              "error-container": "#ffdad6",
+              "surface-container": "#f5edde",
+              "primary": "#42512b",
+              "on-error": "#ffffff",
+              "tertiary-fixed-dim": "#ffb691",
+              "on-surface": "#1e1b13",
+              "primary-container": "#596941",
+              "secondary-fixed": "#ffdcc3",
+              "tertiary": "#7b390f",
+              "on-secondary-container": "#663500",
+              "on-primary-fixed-variant": "#3d4c26",
+              "on-tertiary-fixed": "#341100",
+              "surface-container-high": "#efe7d9",
+              "inverse-surface": "#343026",
+              "on-primary-fixed": "#131f02",
+              "surface-variant": "#e9e2d3"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.5rem", "3xl": "2.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px rgba(30, 27, 19, 0.06);
+        }
+        .organic-blob {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        .dropdown-panel {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .dropdown-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fbf3e4]/80 backdrop-blur-md shadow-[0_20px_40px_rgba(30,27,19,0.06)]">
+<div class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-[#42512b] italic font-headline">The Hearth Club</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-headline font-bold text-lg tracking-tight text-[#904d00] border-b-2 border-[#904d00] pb-1" href="#">Home</a>
+<a class="font-headline font-bold text-lg tracking-tight text-[#42512b] hover:text-[#904d00] transition-colors hover:scale-105 transition-transform duration-200" href="#">Our Vision</a>
+<a class="font-headline font-bold text-lg tracking-tight text-[#42512b] hover:text-[#904d00] transition-colors hover:scale-105 transition-transform duration-200" href="#">Events</a>
+<a class="font-headline font-bold text-lg tracking-tight text-[#42512b] hover:text-[#904d00] transition-colors hover:scale-105 transition-transform duration-200" href="#">Support</a>
+<!-- Spenden Dropdown -->
+<div class="relative group">
+<button class="flex items-center gap-1 font-headline font-bold text-lg tracking-tight text-[#42512b] group-hover:text-[#904d00] transition-colors">
+                        Spenden
+                        <span class="material-symbols-outlined text-sm transition-transform group-hover:rotate-180">expand_more</span>
+</button>
+<!-- Dropdown Panel -->
+<div class="dropdown-panel absolute right-0 top-full pt-4 w-96 z-50">
+<div class="bg-surface border border-outline-variant/30 rounded-3xl shadow-2xl p-8 overflow-hidden relative">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-secondary-fixed-dim/20 organic-blob -z-10"></div>
+<h4 class="font-headline text-xl text-primary mb-3">Unterstütze unsere kreative Arbeit</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+                                Dein Beitrag hilft uns, diesen Raum für alle offen zu halten und neue digitale Werkzeuge für die Gemeinschaft bereitzustellen.
+                            </p>
+<div class="space-y-4 bg-surface-container-low p-5 rounded-2xl border border-outline-variant/20">
+<div>
+<label class="text-[10px] font-bold uppercase tracking-widest text-secondary block mb-0.5">Kontoinhaber</label>
+<p class="text-sm font-semibold text-primary">The Hearth Club e.V.</p>
+</div>
+<div>
+<label class="text-[10px] font-bold uppercase tracking-widest text-secondary block mb-0.5">IBAN</label>
+<p class="text-sm font-mono text-on-surface select-all">DE12 3456 7890 1234 5678 90</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="text-[10px] font-bold uppercase tracking-widest text-secondary block mb-0.5">BIC</label>
+<p class="text-sm font-mono text-on-surface">HEARTHXX123</p>
+</div>
+<div>
+<label class="text-[10px] font-bold uppercase tracking-widest text-secondary block mb-0.5">Verwendungszweck</label>
+<p class="text-sm italic text-on-surface">Atelier Support</p>
+</div>
+</div>
+</div>
+<p class="mt-4 text-[10px] text-outline text-center">Gemeinnützig anerkannt • Spendenbescheinigung auf Anfrage</p>
+</div>
+</div>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-2xl font-semibold hover:scale-105 transition-transform active:scale-95 duration-150">
+                Join Us
+            </button>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 mb-24 relative overflow-hidden">
+<div class="flex flex-col lg:flex-row items-center gap-16">
+<div class="lg:w-1/2 z-10">
+<span class="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-semibold text-sm mb-6">Welcome to Digital Atelier</span>
+<h1 class="font-headline text-6xl md:text-7xl font-black text-primary leading-[1.1] mb-8 tracking-tight">
+                        Cultivating <br/> <span class="text-secondary italic">Creative Heads</span> &amp; Strong Hearts.
+                    </h1>
+<p class="text-on-surface-variant text-xl leading-relaxed mb-10 max-w-xl">
+                        A sanctuary for modern creators. We blend the warmth of traditional craftsmanship with the possibilities of the digital age. Come find your seat at the hearth.
+                    </p>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-3xl font-bold text-lg hover:scale-105 transition-transform shadow-lg">Start Creating</button>
+<button class="bg-surface-container-high text-primary px-8 py-4 rounded-3xl font-bold text-lg hover:bg-surface-container-highest transition-colors">Our Story</button>
+</div>
+</div>
+<div class="lg:w-1/2 relative">
+<div class="absolute -top-12 -right-12 w-64 h-64 bg-tertiary-fixed-dim organic-blob opacity-40 -z-10"></div>
+<div class="absolute -bottom-8 -left-8 w-48 h-48 bg-primary-fixed-dim organic-blob opacity-30 -z-10"></div>
+<img alt="Creative Studio" class="rounded-3xl w-full h-[500px] object-cover editorial-shadow transform rotate-2" data-alt="A warm artist studio filled with natural light, featuring rustic wooden tables, vibrant paints, and creative people collaborating in a cozy atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA73sojxXrJdmDsj4RWcY9Y8F7JGBcMaeQT9789aJ6FTLcSOg2xOP24KXVFhquxfRZYKKwlMuMZDYRliYeDlNIaw4nnz8q94bcFTYXYydBx7c3K-LVT9qduMCUeGnjITtrTla3g0l7sjg9tzy8sQ6g7_icY8fII_NxcSlBtIrLr-CHXULzaGY0rXrKvayS5nDB5JdnfnBBbwvuxaguAvSysJQZ47wM3VRGnJGuEShhmYOwmAA9VH6fqG_1WDS-X3mQ2hRLgd2Co1QE"/>
+</div>
+</div>
+</section>
+<!-- Why Us / Mission -->
+<section class="bg-surface-container-low py-24 mb-24">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="bg-surface p-12 rounded-3xl editorial-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-secondary text-5xl opacity-20 group-hover:opacity-100 transition-opacity">diversity_3</span>
+</div>
+<h3 class="font-headline text-3xl text-primary mb-6">Inclusive Community</h3>
+<p class="text-on-surface-variant leading-relaxed text-lg">
+                            We believe that art knows no boundaries. Our space is intentionally designed to welcome every voice, background, and skill level. It's about shared growth, not competition.
+                        </p>
+</div>
+<div class="bg-primary p-12 rounded-3xl editorial-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-5xl opacity-40">palette</span>
+</div>
+<h3 class="font-headline text-3xl text-surface mb-6">Creative Growth</h3>
+<p class="text-primary-fixed opacity-90 leading-relaxed text-lg">
+                            From digital painting to generative art, we provide the tools and workshops to expand your horizons. Learn from mentors who care about your artistic soul.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Upcoming Events -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h2 class="font-headline text-5xl text-primary mb-4 tracking-tight">Gatherings &amp; Events</h2>
+<p class="text-on-surface-variant text-lg">Save the date for our upcoming community moments.</p>
+</div>
+<a class="text-secondary font-bold flex items-center gap-2 hover:underline" href="#">
+                    View all events <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Event 1 -->
+<div class="bg-surface rounded-3xl overflow-hidden editorial-shadow group cursor-pointer border border-outline-variant/10">
+<div class="h-64 overflow-hidden relative">
+<div class="absolute top-4 left-4 z-10 bg-surface/90 backdrop-blur px-4 py-2 rounded-2xl text-center">
+<span class="block font-black text-secondary leading-none">31</span>
+<span class="text-xs font-bold uppercase tracking-widest">Oct</span>
+</div>
+<img alt="Halloween" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Enchanted Halloween forest setting with soft orange lanterns, moody mist, and autumn leaves scattered on the ground at twilight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF9kjLi-47imwuGJ_VApVY-2q2cNRcwSUtCr52wz0rOD9ExpTsGAM2bLqBEQVl8DyQZZJYPS6olmm5zwoDsxQxcW9S_ydB11qm9pR5-XcHln0OXYGzc_95vNp4tY84tVoedA13wHj3qMJvCibgAS4f0IOiIkwp6sXFC4yofQoJVQiRH35ZR204k4kIeR6YYseQBzR2rSpCzx2m8434nmg8jMrGzSKpGTZV0oexlhVMTiQs4elpYt2w_DCCn6IjdWyJvJNCA4foy4o"/>
+</div>
+<div class="p-8">
+<h4 class="font-headline text-2xl text-primary mb-3">Halloween Night</h4>
+<p class="text-on-surface-variant mb-6">A night of spooky creativity, pumpkin carving, and digital storytelling under the moonlight.</p>
+<div class="flex items-center gap-4 text-sm font-medium text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-lg">schedule</span> 19:00</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-lg">location_on</span> Main Atelier</span>
+</div>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="bg-surface rounded-3xl overflow-hidden editorial-shadow group cursor-pointer border border-outline-variant/10">
+<div class="h-64 overflow-hidden relative">
+<div class="absolute top-4 left-4 z-10 bg-surface/90 backdrop-blur px-4 py-2 rounded-2xl text-center">
+<span class="block font-black text-secondary leading-none">05</span>
+<span class="text-xs font-bold uppercase tracking-widest">Nov</span>
+</div>
+<img alt="Volleyball" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Sun-drenched outdoor volleyball court in a park with long shadows and soft golden afternoon light on sand" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU84P9gfsHpL4dd0Oe34qfNgCXsQvqc5WYXhyyaSRTnVadahAU8V7ezAOhrOwubY8fzLZ47QW-DuxtsaTbGk1ul7aTvrlzAgGwocQe_biuUOBvrFUnYiVfxU8y06avXJqhDq0WldxdN0xV0eCNyKiQj9cxYKHintTF8bEfIqLdmiazVDIloP9JrVcHn-zmPT7X-RG8WhC46MoYkRDHJRhuoJxy3NhUXwaAyElO75xPhdJ81b0aMMjRk00C3ikDn2qgx2ITTh1KpRo"/>
+</div>
+<div class="p-8">
+<h4 class="font-headline text-2xl text-primary mb-3">Volleyball Match</h4>
+<p class="text-on-surface-variant mb-6">Stretch your limbs and enjoy some friendly competition at our weekly community sports day.</p>
+<div class="flex items-center gap-4 text-sm font-medium text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-lg">schedule</span> 15:30</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-lg">location_on</span> Riverside Park</span>
+</div>
+</div>
+</div>
+<!-- Event 3 -->
+<div class="bg-surface rounded-3xl overflow-hidden editorial-shadow group cursor-pointer border border-outline-variant/10">
+<div class="h-64 overflow-hidden relative">
+<div class="absolute top-4 left-4 z-10 bg-surface/90 backdrop-blur px-4 py-2 rounded-2xl text-center">
+<span class="block font-black text-secondary leading-none">12</span>
+<span class="text-xs font-bold uppercase tracking-widest">Nov</span>
+</div>
+<img alt="Stammtisch" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Cozy interior of a candlelit pub or cafe with warm wooden furniture and glasses of wine on a table with soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmsLVDJxDqzjiT4t_SDH8W5pxHWUb70GG6UMXJmE4ArV2WbW37TjyDlejHTB9MAC8jY7xLeMImg3byg2l0odhaZ_BjF6b6C7G89L2QC5m7Y8rK932AigEOcp6ANCM3a1wzMRF2MB80OvSgMPJhByigoA08fe8ZWUmpVuUPCSC33s9P-7BTy5lJRn4oQodzFXqvEKUAztDmhenG-WzKG6ElKR36WwioatLucPAwRggzhAzBnlV0R6UOSc2L16GKhbI3TywlHKWbEIw"/>
+</div>
+<div class="p-8">
+<h4 class="font-headline text-2xl text-primary mb-3">Stammtisch</h4>
+<p class="text-on-surface-variant mb-6">Our traditional informal gathering. No agenda, just good drinks and deep conversations about art.</p>
+<div class="flex items-center gap-4 text-sm font-medium text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-lg">schedule</span> 20:00</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-lg">location_on</span> The Old Tavern</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Subtle Support Message -->
+<section class="max-w-7xl mx-auto px-8 mb-24">
+<div class="border-t border-outline-variant/30 pt-12 text-center max-w-2xl mx-auto">
+<p class="text-on-surface-variant italic mb-4">"Wir bauen eine Brücke zwischen analoger Seele und digitaler Zukunft."</p>
+<p class="text-xs text-outline uppercase tracking-widest font-bold">The Hearth Club ist ein gemeinnütziges Projekt</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[2.5rem] mt-20 bg-[#42512b] dark:bg-stone-950">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 gap-8 max-w-7xl mx-auto">
+<div class="text-xl font-serif text-[#fe932c]">The Hearth Club</div>
+<div class="flex flex-wrap justify-center gap-10">
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide text-[#bbcd9c] hover:text-[#fe932c] transition-colors opacity-90 hover:opacity-100" href="#">Privacy</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide text-[#bbcd9c] hover:text-[#fe932c] transition-colors opacity-90 hover:opacity-100" href="#">Contact Us</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide text-[#bbcd9c] hover:text-[#fe932c] transition-colors opacity-90 hover:opacity-100" href="#">Community Guidelines</a>
+<a class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide text-[#bbcd9c] hover:text-[#fe932c] transition-colors opacity-90 hover:opacity-100" href="#">Newsletter</a>
+</div>
+<div class="font-['Plus_Jakarta_Sans'] text-sm tracking-wide text-[#fff8ef] opacity-70">
+                © 2024 The Hearth Club. Built for Connection.
+            </div>
+</div>
+</footer>
+</body></html>
