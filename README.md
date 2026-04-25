@@ -22,3 +22,24 @@ Run the app:
 ```bash
 npm run dev
 ```
+
+## Demo Tunnel (ngrok + Docker)
+
+1. Copy `.env.demo.example` values into your shell:
+
+```bash
+export NGROK_AUTHTOKEN="<your-ngrok-token>"
+export DEMO_PORT=4173
+```
+
+2. Start demo server + public tunnel:
+
+```bash
+npm run demo:start
+```
+
+3. Stop everything:
+
+```bash
+npm run demo:stop
+```

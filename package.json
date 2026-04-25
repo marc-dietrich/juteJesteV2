@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "demo:start": "./scripts/demo-start.sh",
+    "demo:stop": "./scripts/demo-stop.sh"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
