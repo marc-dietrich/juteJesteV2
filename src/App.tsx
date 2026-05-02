@@ -37,7 +37,9 @@ function App() {
             ))}
           </nav>
           <Button asChild variant="secondary" size="sm">
-            <a href="/pdfs/mitglied-werden.pdf" download>Mitglied werden</a>
+            <a href="/pdfs/mitglied-werden.pdf" download>
+              Mitglied werden
+            </a>
           </Button>
         </div>
       </header>
@@ -56,8 +58,8 @@ function App() {
               </span>
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-on-surface-variant">
-              Bei uns geht’s darum, einfach zusammenzukommen, Momente zu teilen und
-              gemeinsam was auf die Beine zu stellen.
+              Bei uns geht’s darum, einfach zusammenzukommen, Momente zu teilen
+              und gemeinsam was auf die Beine zu stellen.
             </p>
           </div>
           <div className="relative">
@@ -224,19 +226,13 @@ function App() {
                         }`}
                       >
                         <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-outline-variant/40 bg-white">
-                          {supporter.logo ? (
-                            <img
-                              src={supporter.logo}
-                              alt={`${supporter.name} Logo`}
-                              className="h-full w-full object-contain rounded-xl"
-                            />
-                          ) : (
-                            <div className="flex h-full w-full items-center justify-center rounded-xl bg-surface-container-low">
-                              <User className="h-10 w-10 text-on-surface-variant" />
-                            </div>
-                          )}
+                          <img
+                            src={supporter.logo}
+                            alt={`${supporter.name} Logo`}
+                            className="h-full w-full object-contain rounded-xl"
+                          />
                         </div>
-                         
+
                         <p className="font-medium text-on-surface-variant">
                           {supporter.name}
                         </p>
@@ -269,7 +265,8 @@ function App() {
               Registergericht Amtsgericht Stendal · Registernummer: VR7046
             </p>
             <a
-              href="/pdfs/datenschutz.pdf" download
+              href="/pdfs/datenschutz.pdf"
+              download
               className="mt-4 inline-flex items-center gap-2 hover:underline"
             >
               Datenschutz
