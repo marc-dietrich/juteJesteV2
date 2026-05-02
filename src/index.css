@@ -27,3 +27,14 @@
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   }
 }
+
+/* custom part */
+
+.justify-center-last-hyphen {
+  text-align: justify;
+  text-align-last: center;
+
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
