@@ -100,10 +100,6 @@ function App() {
               <h2 className="font-headline text-4xl font-black text-primary">
                 Termine & Co.
               </h2>
-              <p className="mt-2 text-on-surface-variant">
-                Alle Event-Bereiche aus dem alten Template neu strukturiert und
-                modular.
-              </p>
             </div>
           </div>
 
