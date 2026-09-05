@@ -27,7 +27,7 @@ export const events = [
 
 export const donationDetails = {
   accountHolder: 'Jute Jeste e.V.',
-  iban: 'DE 6016 0620 0863 0205 9900',
+  iban: 'DE60 1606 2008 6302 0599 00',
   usage: [
     'Deinen Namen und deine Adresse für die Spendenquittung',
     'Optional: Hinweis, falls du nicht als Supporter genannt werden möchtest',

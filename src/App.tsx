@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { AtSign, Link, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AtSign, HandCoins, Link, Mail } from "lucide-react";
 import { FaFacebook } from "react-icons/fa";
 
 import { Badge } from "@/components/ui/badge";
@@ -11,31 +11,62 @@ import {
   navigation,
   supporters,
 } from "@/data/site-content";
+import { Philosophie } from "@/pages/Philosophie";
+
+function getPageFromPath(): "home" | "philosophie" {
+  return window.location.pathname === "/philosophie"
+    ? "philosophie"
+    : "home";
+}
 
 function App() {
   const [showSupportDetails, setShowSupportDetails] = useState(false);
+  const [page, setPage] = useState<"home" | "philosophie">(getPageFromPath);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setPage(getPageFromPath());
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const navigate = (path: string) => {
+    window.history.pushState(null, "", path);
+    setPage(getPageFromPath());
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className="min-h-screen bg-surface text-on-surface font-body">
       <header className="sticky top-0 z-50 border-b border-outline-variant/20 bg-surface/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
           <a
-            href="#top"
+            href={page === "home" ? "#top" : "/"}
+            onClick={(event) => {
+              if (page !== "home") {
+                event.preventDefault();
+                navigate("/");
+              }
+            }}
             className="font-headline text-2xl font-black italic text-primary"
           >
             Jute Jeste e.V.
           </a>
-          <nav className="hidden items-center gap-6 md:flex">
-            {navigation.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="font-headline text-lg font-bold text-primary transition-colors hover:text-secondary"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          {page === "home" && (
+            <nav className="hidden items-center gap-6 md:flex">
+              {navigation.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="font-headline text-lg font-bold text-primary transition-colors hover:text-secondary"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          )}
           <Button asChild variant="secondary" size="sm">
             <a href="/pdfs/mitglied-werden.pdf" download>
               Mitglied werden
@@ -44,17 +75,18 @@ function App() {
         </div>
       </header>
 
-      <main
-        id="top"
-        className="mx-auto flex max-w-6xl flex-col gap-24 px-6 py-14 md:px-8 md:py-20"
-      >
+      {page === "home" ? (
+        <main
+          id="top"
+          className="mx-auto flex max-w-6xl flex-col gap-24 px-6 py-14 md:px-8 md:py-20"
+        >
         <section className="grid items-center gap-10 lg:grid-cols-2">
           <div className="space-y-6">
             <Badge className="w-fit">Die gute Geste mit Dialekt</Badge>
             <h1 className="font-headline text-5xl font-black leading-tight tracking-tight text-primary md:text-6xl">
               Gemeinsam was erleben
               <span className="block text-secondary italic">
-                Turniere, Partys und Aktionen
+                Turniere, Partys & Co.
               </span>
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-on-surface-variant">
@@ -67,7 +99,7 @@ function App() {
             <div className="organic-blob absolute -bottom-6 -right-6 h-28 w-28 bg-tertiary-fixed/80" />
             <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-3xl bg-surface-container-low shadow-editorial p-3">
               <img
-                src="/images/gruppenbild.webp"
+                src="/images/gruppenbild.jpg"
                 alt="Gruppenbild von Jute Jeste"
                 className="h-full w-full object-cover rounded-3xl"
               />
@@ -103,32 +135,53 @@ function App() {
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {events.map((event) => (
-              <Card key={event.title} className="overflow-hidden bg-surface">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="h-48 w-full bg-surface-container-low object-contain"
-                />
-                <CardHeader>
-                  <CardTitle>{event.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="leading-relaxed text-on-surface-variant">
-                    {event.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {events.map((event, index) => {
+              const isLast = index === events.length - 1;
+              return (
+                <Card
+                  key={event.title}
+                  className={`overflow-hidden bg-surface ${
+                    isLast
+                      ? "md:col-span-2 md:justify-self-center md:w-[calc(50%-0.75rem)] lg:col-span-1 lg:w-auto lg:justify-self-auto"
+                      : ""
+                  }`}
+                >
+                  <div className="overflow-hidden bg-surface-container-low">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="aspect-[16/9] h-full w-full object-cover"
+                    />
+                  </div>
+                  <CardHeader>
+                    <CardTitle>{event.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="leading-relaxed text-on-surface-variant">
+                      {event.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
 
-          <a href="#termine" className="block">
             <Card className="bg-hearth text-surface">
               <CardContent className="grid items-start gap-6 p-6 md:grid-cols-[1fr_auto] md:p-8">
                 <div className="space-y-4">
                   <CardTitle className="text-surface flex items-center">
-                    Philosophie <Link className="ml-2 h-4 w-4" />
+                    <a
+                      href="/philosophie"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        navigate("/philosophie");
+                      }}
+                      className="inline-flex items-center transition-colors hover:text-secondary-container"
+                    >
+                      Philosophie
+                      <Link className="ml-1 h-4 w-4" />
+                    </a>
                   </CardTitle>
                   <p className="max-w-2xl leading-relaxed text-surface/90 justify-center-last-hyphen">
                     Unsere Veranstaltungen sollen offen, bezahlbar und
@@ -146,27 +199,39 @@ function App() {
                 </div>
               </CardContent>
             </Card>
-          </a>
         </section>
 
         <section id="support" className="space-y-8">
-          <div>
-            <h2 className="font-headline text-4xl font-black text-primary">
-              Support
-            </h2>
-            <p className="mt-3 max-w-3xl text-lg leading-relaxed text-on-surface-variant justify-center-last-hyphen">
-              Bei jedem Event entstehen Kosten. Wir planen so, dass alles
-              gedeckt ist und Getränke & Co. trotzdem erschwinglich bleiben. Mit
-              einer Spende helft ihr uns, sicherer zu planen und alle zu
-              entlasten.
-            </p>
-            <div className="mt-5">
-              <Button
-                variant="outline"
-                onClick={() => setShowSupportDetails((current) => !current)}
-              >
-                {showSupportDetails ? "Weniger anzeigen" : "Mehr anzeigen"}
-              </Button>
+          <div className="grid items-center gap-10 md:grid-cols-[1fr_auto]">
+            <div>
+              <h2 className="font-headline text-4xl font-black text-primary">
+                Support
+              </h2>
+              <p className="mt-3 max-w-3xl text-lg leading-relaxed text-on-surface-variant justify-center-last-hyphen">
+                Bei jedem Event entstehen Kosten. Wir planen so, dass alles
+                gedeckt ist und Getränke & Co. trotzdem erschwinglich bleiben.
+                Mit einer Spende helft ihr uns, sicherer zu planen und alle zu
+                entlasten.
+              </p>
+              <div className="mt-5">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowSupportDetails((current) => !current)}
+                >
+                  {showSupportDetails ? "Weniger anzeigen" : "Mehr anzeigen"}
+                </Button>
+              </div>
+            </div>
+
+            <div className="hidden justify-self-center md:block">
+              <div className="relative flex h-40 w-40 items-center justify-center">
+                <div className="organic-blob absolute inset-0 bg-primary-fixed-dim/60" />
+                <div className="organic-blob absolute -right-4 -top-5 h-16 w-16 bg-tertiary-fixed/80" />
+                <div className="organic-blob absolute -bottom-4 -left-4 h-12 w-12 bg-secondary-container/50" />
+                <div className="relative flex h-24 w-24 rotate-6 items-center justify-center rounded-2xl bg-surface shadow-editorial">
+                  <HandCoins className="h-12 w-12 text-secondary" strokeWidth={1.5} />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -248,7 +313,10 @@ function App() {
             />
           </div>
         </section>
-      </main>
+        </main>
+      ) : (
+        <Philosophie />
+      )}
 
       <footer className="rounded-t-[2.5rem] bg-primary py-12 text-surface">
         <div className="mx-auto grid max-w-6xl gap-6 px-6 md:grid-cols-2 md:px-8">
