@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { AtSign, HandCoins, Link, Mail } from "lucide-react";
 import { FaFacebook } from "react-icons/fa";
 
@@ -23,10 +23,26 @@ function App() {
   const [showSupportDetails, setShowSupportDetails] = useState(false);
   const [page, setPage] = useState<"home" | "philosophie">(getPageFromPath);
 
+  // Reset the scroll position whenever the route/page changes. Runs in a
+  // layout effect so it fires AFTER the new page has been rendered but before
+  // paint. We temporarily disable the global `scroll-behavior: smooth` so the
+  // jump is instant — a smooth programmatic scroll that starts before the DOM
+  // swap (against the old, much taller page) is what left users at the bottom.
+  useLayoutEffect(() => {
+    const html = document.documentElement;
+    const previousBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    html.style.scrollBehavior = previousBehavior;
+  }, [page]);
+
   useEffect(() => {
+    // Take over scroll handling for back/forward so the browser does not
+    // restore a stale scroll position after we already reset to the top.
+    window.history.scrollRestoration = "manual";
+
     const handlePopState = () => {
       setPage(getPageFromPath());
-      window.scrollTo(0, 0);
     };
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
@@ -35,7 +51,6 @@ function App() {
   const navigate = (path: string) => {
     window.history.pushState(null, "", path);
     setPage(getPageFromPath());
-    window.scrollTo(0, 0);
   };
 
   return (
