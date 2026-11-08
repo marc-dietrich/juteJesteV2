@@ -2,15 +2,18 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { AtSign, HandCoins, Link, Mail } from "lucide-react";
 import { FaFacebook } from "react-icons/fa";
 
+import { PromoToast } from "@/components/PromoToast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   donationDetails,
   events,
+  flyerPromo,
   navigation,
   supporters,
 } from "@/data/site-content";
+import { isFlyerPromoActive } from "@/lib/promo";
 import { Philosophie } from "@/pages/Philosophie";
 
 function getPageFromPath(): "home" | "philosophie" {
@@ -22,6 +25,10 @@ function getPageFromPath(): "home" | "philosophie" {
 function App() {
   const [showSupportDetails, setShowSupportDetails] = useState(false);
   const [page, setPage] = useState<"home" | "philosophie">(getPageFromPath);
+  // The flyer section and the popup are temporary and only shown until the
+  // deadline defined in `flyerPromo.endsAt` (27 November 2026).
+  const flyerActive = isFlyerPromoActive();
+  const [showPromo, setShowPromo] = useState(flyerActive);
 
   // Reset the scroll position whenever the route/page changes. Runs in a
   // layout effect so it fires AFTER the new page has been rendered but before
@@ -51,6 +58,26 @@ function App() {
   const navigate = (path: string) => {
     window.history.pushState(null, "", path);
     setPage(getPageFromPath());
+  };
+
+  const scrollToFlyer = () => {
+    document
+      .getElementById("flyer")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const showFlyer = () => {
+    setShowPromo(false);
+
+    if (page === "home") {
+      scrollToFlyer();
+      return;
+    }
+
+    // Coming from a sub page we first navigate home, then scroll once the
+    // home page has been rendered (and the scroll reset has happened).
+    navigate("/");
+    window.setTimeout(scrollToFlyer, 150);
   };
 
   return (
@@ -328,6 +355,19 @@ function App() {
             />
           </div>
         </section>
+
+        {flyerActive && (
+          <section id="flyer" className="scroll-mt-24 space-y-8">
+            <h2 className="font-headline text-4xl font-black text-primary">
+              {flyerPromo.heading}
+            </h2>
+            <img
+              src={flyerPromo.preview}
+              alt={`Flyer ${flyerPromo.title} – ${flyerPromo.dateLabel}, ${flyerPromo.timeLabel}`}
+              className="mx-auto block max-h-[78vh] w-auto max-w-full rounded-2xl shadow-editorial"
+            />
+          </section>
+        )}
         </main>
       ) : (
         <Philosophie />
@@ -377,6 +417,12 @@ function App() {
           </div>
         </div>
       </footer>
+
+      <PromoToast
+        open={showPromo && flyerActive}
+        onClose={() => setShowPromo(false)}
+        onShowFlyer={showFlyer}
+      />
     </div>
   );
 }

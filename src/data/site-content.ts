@@ -34,6 +34,17 @@ export const donationDetails = {
   ],
 }
 
+// Temporary promo: the flyer section and the popup are only shown until
+// `endsAt` (end of 27 November 2026). Afterwards both disappear automatically.
+export const flyerPromo = {
+  preview: '/images/flyer-kinderbasteln-2026.jpg',
+  heading: 'Kinderbasteln',
+  title: 'Kinder-Basteln',
+  dateLabel: 'Freitag, 27. November 2026',
+  timeLabel: '14–18 Uhr',
+  endsAt: '2026-11-27T23:59:59+01:00',
+}
+
 export const supporters = [
   {
     name: 'Jütro Tiefkühlkost GmbH & Co. KG',
